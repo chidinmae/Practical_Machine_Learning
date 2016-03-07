@@ -1,0 +1,53 @@
+---
+title: "Practical Machine Learning Final Project"
+author: Chidinma Egbukichi
+date: March 6, 2016
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+load("~/Documents/Coursera/Practical_Machine_Learning/Practical_Machine_Learning/fin_proj.RData")
+```
+## Cleaning the Data
+
+The object types in the training and test data are different. So I dropped the logical types (NA) columns in the test set from both datasets before I began fitting the data in the training set.
+
+```
+bad <- is.na(head(testing,n=1))
+new_testing <- testing[,!bad]
+new_training <- training[,!bad]
+```
+
+
+## Classification Method and Cross Validation
+
+I used the boosting method of classification because, as discussed in lecture, it is one of the top-performing algorithms for prediction (along with random forest). I did not use random forest because of the danger of overfitting. Because this a classification problem (categorical responses), regression methods are unsuitable.
+
+For cross validation, I used the trControl function in caret and selected a k-folds cross validation technique. I chose to use 10 folds because there were a large enough number of observations to account for the bias and variance trade-off.
+
+```
+fitControl <- trainControl(method="cv",number=10)
+model_gbm <- train(classe~.,data=new_training,trControl=fitControl,method="gbm",verbose=FALSE)
+```
+
+## Model and Predictions
+
+The model used 19,622 samples, 59 predictors for a response with 5 classes
+
+```{r, echo=FALSE}
+model_gbm
+```
+
+```
+predict_gbm <- predict(model_gbm, new_testing)
+summary(predict_gbm)
+```
+
+```{r, echo=FALSE}
+summary(predict_gbm)
+```
+
+## Expected Out of Sample Error 
+
+I would, as always, expect the out of sample error to be lower than the in sample error. Increasing number of categories also decreases the expected out of sample error. The model predicted every observation in the test set to be done correctly, class A.
