@@ -102,6 +102,9 @@ model_gbm &lt;- train(classe~.,data=subset_training,trControl=fitControl,method=
 <p>The best sample had a 96.4% accuracy on the training set with 150 trees and an interaction depth of 3. As always, I expect the in sample error to be lower than the out of sample error. I predict 5% out of sample error in the test set.</p>
 <h2 id="predictions">Predictions</h2>
 <pre><code>predict_gbm &lt;- predict(model_gbm, new_testing)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">predict_gbm</code></pre>
+<pre><code>##  [1] B A B A A E D B A A B C B A E E A B B B
+## Levels: A B C D E</code></pre>
 
 </body>
 </html>

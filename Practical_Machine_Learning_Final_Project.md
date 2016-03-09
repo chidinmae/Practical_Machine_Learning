@@ -107,3 +107,10 @@ Predictions
 -----------
 
     predict_gbm <- predict(model_gbm, new_testing)
+
+``` r
+predict_gbm
+```
+
+    ##  [1] B A B A A E D B A A B C B A E E A B B B
+    ## Levels: A B C D E
