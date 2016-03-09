@@ -90,3 +90,7 @@ I predict 5% out of sample error in the test set.
 ```
 predict_gbm <- predict(model_gbm, new_testing)
 ```
+```{r}
+predict_gbm
+```
+
