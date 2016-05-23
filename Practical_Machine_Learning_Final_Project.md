@@ -36,7 +36,7 @@ Lastly, check for row completion.
     complete <- complete.cases(subset_training)
     subset_training <- subset_training[complete,]
 
-After cleaning there are 53 predictors and 19,622 observations
+After cleaning there are 52 predictors, 1 Response and 19,622 observations
 
 ``` r
 dim(subset_training)
